@@ -1,0 +1,7 @@
+<div *ngIf="artist">
+	<h1>
+	    <a [routerLink]="['/artist',  artist.id ]">{{ artist.name }}</a>
+    </h1>
+
+    <a class="btn btn-info" href="{{ artist._embedded.performance._links.self.href }}">Performance List</a>
+</div>
