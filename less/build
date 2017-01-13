@@ -1,0 +1,1 @@
+lessc app.less | cleancss > ../app/app.css

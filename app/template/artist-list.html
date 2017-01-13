@@ -1,0 +1,29 @@
+<ul class="pagination center-block pull-right">
+  <li ng-repeat="(name, link) in data._links">
+    <a href="#" ng-click="load(link.href)">{{ name }}</a>
+  </li>
+</ul>
+
+<h1>Artists</h1>
+
+<table class="table" ng-init="init()">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Abbreviation</th>
+      <th>Name</th>
+      <th>Performances</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr
+      ng-click="redirectToArtist(artist)"
+      ng-repeat="artist in data._embedded.artist">
+      <th class="id">{{ artist.id }}</th>
+      <td>{{ artist.abbreviation }}</td>
+      <td>{{ artist.name }}</td>
+      <td>{{ artist._computed.performance.count }}</td>
+    </tr>
+  </tbody>
+</table>

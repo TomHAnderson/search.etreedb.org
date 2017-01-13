@@ -1,0 +1,48 @@
+<h1>{{ artist.name }}</h1>
+
+
+<ul class="pagination center-block pull-right">
+  <li ng-repeat="(name, link) in performance._links">
+    <a href="#" ng-click="loadPerformanceByUrl(link.href)">{{ name }}</a>
+  </li>
+</ul>
+<h2>Performances</h2>
+
+<table class="table" ng-init="init()">
+  <thead>
+    <tr>
+      <th class="sort" ng-click="orderBy({field: 'id'}, 'id')">
+        <i ng-show="lastOrderByLabel == 'id' && lastOrderByDirection == 'asc'" class="fa fa-sort-numeric-asc"></i>
+        <i ng-show="lastOrderByLabel == 'id' && lastOrderByDirection == 'desc'" class="fa fa-sort-numeric-desc"></i>
+        Id
+      </th>
+
+      <th class="sort" ng-click="orderBy({field: 'performanceDate'}, 'performanceDate')">
+        <i ng-show="lastOrderByLabel == 'performanceDate' && lastOrderByDirection == 'asc'" class="fa fa-sort-asc"></i>
+        <i ng-show="lastOrderByLabel == 'performanceDate' && lastOrderByDirection == 'desc'" class="fa fa-sort-desc"></i>
+        Performance Date
+      </th>
+
+      <th class="sort" ng-click="orderBy({field: 'venue'}, 'venue')">
+        <i ng-show="lastOrderByLabel == 'venue' && lastOrderByDirection == 'asc'" class="fa fa-sort-alpha-asc"></i>
+        <i ng-show="lastOrderByLabel == 'venue' && lastOrderByDirection == 'desc'" class="fa fa-sort-alpha-desc"></i>
+        Venue
+      </th>
+
+      <th class="sort" ng-click="orderBy({field: 'state'}, 'state')">
+        <i ng-show="lastOrderByLabel == 'state' && lastOrderByDirection == 'asc'" class="fa fa-sort-alpha-asc"></i>
+        <i ng-show="lastOrderByLabel == 'state' && lastOrderByDirection == 'desc'" class="fa fa-sort-alpha-desc"></i>
+        State
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr ng-repeat="performance in performance._embedded.performance">
+      <th class="id">{{ performance.id }}</th>
+      <td>{{ performance.performanceDate | date:'YYYY-MM-DD'}}</td>
+      <td>{{ performance.venue }}</td>
+      <td>{{ performance.state }}</td>
+    </tr>
+  </tbody>
+</table>
