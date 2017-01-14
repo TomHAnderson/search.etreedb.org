@@ -61,4 +61,9 @@ angular.module('etreedb')
 		);
 	}
 
+	$scope.redirectToPerformance = function(performance)
+	{
+		$location.path('/performance/' + performance.id);
+	}
+
 }]);

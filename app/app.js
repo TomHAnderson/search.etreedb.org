@@ -9,7 +9,7 @@ $(function(){
     });
 });
 
-angular.module('etreedb', ['ngRoute', 'angular-loading-bar'])
+angular.module('etreedb', ['ngRoute', 'angular-loading-bar', 'nl2br'])
 .config([
 	'$locationProvider',
 	'$routeProvider',
@@ -30,6 +30,10 @@ angular.module('etreedb', ['ngRoute', 'angular-loading-bar'])
 			.when('/performance', {
 				templateUrl : 'template/performance-list.html',
 				controller : 'PerformanceListController'
+			})
+			.when('/performance/:id', {
+				templateUrl : 'template/performance.html',
+				controller : 'PerformanceController'
 			})
 			.otherwise({redirectTo: '/'});
 

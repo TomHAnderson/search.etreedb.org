@@ -169,7 +169,9 @@
   </thead>
 
   <tbody>
-    <tr data-href ng-repeat="performance in performance._embedded.performance">
+    <tr data-href
+      ng-repeat="performance in performance._embedded.performance"
+      ng-click="redirectToPerformance(performance)">
       <th role="row">{{ performance.id }}</th>
       <td>{{ performance.performanceDate | date:'YYYY-MM-DD'}}</td>
       <td>{{ performance.year }}</td>

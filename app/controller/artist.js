@@ -5,7 +5,8 @@ angular.module('etreedb')
 	'$routeParams',
 	'$scope',
 	'$http',
-	function($routeParams, $scope, $http) {
+	'$location',
+	function($routeParams, $scope, $http, $location) {
 
 	$scope.init = function()
 	{
@@ -66,4 +67,8 @@ angular.module('etreedb')
 		);
 	}
 
+	$scope.redirectToPerformance = function(performance)
+	{
+		$location.path('/performance/' + performance.id);
+	}
 }]);

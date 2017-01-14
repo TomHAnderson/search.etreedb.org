@@ -95,7 +95,7 @@
     <tr data-href
       ng-click="redirectToArtist(artist)"
       ng-repeat="artist in data._embedded.artist">
-      <th class="id">{{ artist.id }}</th>
+      <th role="row">{{ artist.id }}</th>
       <td>{{ artist.abbreviation }}</td>
       <td>{{ artist.name }}</td>
       <td>{{ artist._computed.performance.count }}</td>
