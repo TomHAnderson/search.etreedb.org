@@ -1,8 +1,18 @@
-<ul class="pagination center-block pull-right">
-  <li ng-repeat="(name, link) in data._links">
-    <a href="#" ng-click="load(link.href)">{{ name }}</a>
-  </li>
-</ul>
+<div class="pull-right">
+  Page {{ data.page }} of {{ data.page_count }}
+
+  <ul class="pagination center-block">
+    <li>
+      <a href="#" ng-click="init()">
+        <i class="fa fa-filter"></i>
+        reset
+      </a>
+    </li>
+    <li ng-repeat="(name, link) in data._links">
+      <a href="#" ng-click="load(link.href)">{{ name }}</a>
+    </li>
+  </ul>
+</div>
 
 <h1>Artists</h1>
 
@@ -10,14 +20,79 @@
   <thead>
     <tr>
       <th>Id</th>
-      <th>Abbreviation</th>
-      <th>Name</th>
+      <th>
+        <span ng-show="! showFilterAbbreviation">Abbreviation</span>
+
+        <select
+          ng-show="showFilterAbbreviation"
+          ng-model="filterTypeAbbreviation"
+          >
+            <option value="eq">=</option>
+            <option value="neq">!=</option>
+            <option value="lt">&lt;</option>
+            <option value="lte">&lt;=</option>
+            <option value="gt">&gt;</option>
+            <option value="gte">&gt;=</option>
+            <option value="like">like</option>
+            <option value="isnull">null</option>
+            <option value="isnotnull">! null</option>
+        </select>
+
+        <input
+          ng-show="showFilterAbbreviation"
+          placeholder="Abbreviation"
+          type="text"
+          size="20"
+          ng-model="filterAbbreviation"
+          ng-init="filterAbbreviation = ''">
+
+        <i class="btn btn-info fa fa-filter"
+          ng-click="filter({ 'type': filterTypeAbbreviation, 'field': 'abbreviation', 'value': filterAbbreviation })"
+          ng-show="showFilterAbbreviation"></i>
+
+        <i class="fa fa-filter"
+          ng-click="showFilterAbbreviation = ! showFilterAbbreviation"
+          ng-show="! showFilterAbbreviation"></i>
+      </th>
+      <th>
+        <span ng-show="! showFilterName">Name</span>
+
+        <select
+          ng-show="showFilterName"
+          ng-model="filterTypeName"
+          >
+            <option value="eq">=</option>
+            <option value="neq">!=</option>
+            <option value="lt">&lt;</option>
+            <option value="lte">&lt;=</option>
+            <option value="gt">&gt;</option>
+            <option value="gte">&gt;=</option>
+            <option value="like">like</option>
+            <option value="isnull">null</option>
+            <option value="isnotnull">! null</option>
+        </select>
+        <input
+          ng-show="showFilterName"
+          placeholder="Name"
+          type="text"
+          size="20"
+          ng-model="filterName"
+          ng-init="filterName = ''">
+
+        <i class="btn btn-info fa fa-filter"
+          ng-click="filter({ 'type': filterTypeName, 'field': 'name', 'value': filterName })"
+          ng-show="showFilterName"></i>
+
+        <i class="fa fa-filter"
+          ng-click="showFilterName = ! showFilterName"
+          ng-show="! showFilterName"></i>
+      </th>
       <th>Performances</th>
     </tr>
   </thead>
 
   <tbody>
-    <tr
+    <tr data-href
       ng-click="redirectToArtist(artist)"
       ng-repeat="artist in data._embedded.artist">
       <th class="id">{{ artist.id }}</th>

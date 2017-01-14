@@ -1,46 +1,177 @@
 <h1>{{ artist.name }}</h1>
 
+<div class="pull-right">
+  Page {{ performance.page }} of {{ performance.page_count }}
 
-<ul class="pagination center-block pull-right">
-  <li ng-repeat="(name, link) in performance._links">
-    <a href="#" ng-click="loadPerformanceByUrl(link.href)">{{ name }}</a>
-  </li>
-</ul>
+  <ul class="pagination center-block">
+    <li>
+      <a href="#" ng-click="init()">
+        <i class="fa fa-filter"></i>
+        reset
+      </a>
+    </li>
+    <li ng-repeat="(name, link) in performance._links">
+      <a href="#" ng-click="loadPerformanceByUrl(link.href)">{{ name }}</a>
+    </li>
+  </ul>
+</div>
+
 <h2>Performances</h2>
 
 <table class="table" ng-init="init()">
   <thead>
     <tr>
-      <th class="sort" ng-click="orderBy({field: 'id'}, 'id')">
-        <i ng-show="lastOrderByLabel == 'id' && lastOrderByDirection == 'asc'" class="fa fa-sort-numeric-asc"></i>
-        <i ng-show="lastOrderByLabel == 'id' && lastOrderByDirection == 'desc'" class="fa fa-sort-numeric-desc"></i>
+      <th>
         Id
       </th>
 
-      <th class="sort" ng-click="orderBy({field: 'performanceDate'}, 'performanceDate')">
-        <i ng-show="lastOrderByLabel == 'performanceDate' && lastOrderByDirection == 'asc'" class="fa fa-sort-asc"></i>
-        <i ng-show="lastOrderByLabel == 'performanceDate' && lastOrderByDirection == 'desc'" class="fa fa-sort-desc"></i>
-        Performance Date
+      <th>
+        <span ng-show="! showFilterPerformanceDate">Date</span>
+
+        <select
+          ng-show="showFilterPerformanceDate"
+          ng-model="filterTypePerformanceDate"
+          >
+            <option value="eq">=</option>
+            <option value="neq">!=</option>
+            <option value="lt">&lt;</option>
+            <option value="lte">&lt;=</option>
+            <option value="gt">&gt;</option>
+            <option value="gte">&gt;=</option>
+            <option value="like">like</option>
+            <option value="isnull">null</option>
+            <option value="isnotnull">! null</option>
+        </select>
+
+        <input
+          ng-show="showFilterPerformanceDate"
+          placeholder="Performance Date"
+          type="text"
+          size="20"
+          ng-model="filterPerformanceDate"
+          ng-init="filterPerformanceDate = ''">
+
+        <i class="btn btn-info fa fa-filter"
+          ng-click="filter({ 'type': filterTypePerformanceDate, 'field': 'performanceDate', 'value': filterPerformanceDate })"
+          ng-show="showFilterPerformanceDate"></i>
+
+        <i class="fa fa-filter"
+          ng-click="showFilterPerformanceDate = ! showFilterPerformanceDate"
+          ng-show="! showFilterPerformanceDate"></i>
       </th>
 
-      <th class="sort" ng-click="orderBy({field: 'venue'}, 'venue')">
-        <i ng-show="lastOrderByLabel == 'venue' && lastOrderByDirection == 'asc'" class="fa fa-sort-alpha-asc"></i>
-        <i ng-show="lastOrderByLabel == 'venue' && lastOrderByDirection == 'desc'" class="fa fa-sort-alpha-desc"></i>
-        Venue
+      <th>
+        <span ng-show="! showFilterYear">Year</span>
+
+        <select
+          ng-show="showFilterYear"
+          ng-model="filterTypeYear"
+          >
+            <option value="eq">=</option>
+            <option value="neq">!=</option>
+            <option value="lt">&lt;</option>
+            <option value="lte">&lt;=</option>
+            <option value="gt">&gt;</option>
+            <option value="gte">&gt;=</option>
+            <option value="like">like</option>
+            <option value="isnull">null</option>
+            <option value="isnotnull">! null</option>
+        </select>
+
+        <input
+          ng-show="showFilterYear"
+          placeholder="Year"
+          type="text"
+          size="20"
+          ng-model="filterYear"
+          ng-init="filterYear = ''">
+
+        <i class="btn btn-info fa fa-filter"
+          ng-click="filter({ 'type': filterTypeYear, 'field': 'year', 'value': filterYear })"
+          ng-show="showFilterYear"></i>
+
+        <i class="fa fa-filter"
+          ng-click="showFilterYear = ! showFilterYear"
+          ng-show="! showFilterYear"></i>
       </th>
 
-      <th class="sort" ng-click="orderBy({field: 'state'}, 'state')">
-        <i ng-show="lastOrderByLabel == 'state' && lastOrderByDirection == 'asc'" class="fa fa-sort-alpha-asc"></i>
-        <i ng-show="lastOrderByLabel == 'state' && lastOrderByDirection == 'desc'" class="fa fa-sort-alpha-desc"></i>
-        State
+      <th>
+        <span ng-show="! showFilterVenue">Venue</span>
+
+        <select
+          ng-show="showFilterVenue"
+          ng-model="filterTypeVenue"
+          >
+            <option value="eq">=</option>
+            <option value="neq">!=</option>
+            <option value="lt">&lt;</option>
+            <option value="lte">&lt;=</option>
+            <option value="gt">&gt;</option>
+            <option value="gte">&gt;=</option>
+            <option value="like">like</option>
+            <option value="isnull">null</option>
+            <option value="isnotnull">! null</option>
+        </select>
+
+        <input
+          ng-show="showFilterVenue"
+          placeholder="Venue"
+          type="text"
+          size="20"
+          ng-model="filterVenue"
+          ng-init="filterVenue = ''">
+
+        <i class="btn btn-info fa fa-filter"
+          ng-click="filter({ 'type': filterTypeVenue, 'field': 'venue', 'value': filterVenue })"
+          ng-show="showFilterVenue"></i>
+
+        <i class="fa fa-filter"
+          ng-click="showFilterVenue = ! showFilterVenue"
+          ng-show="! showFilterVenue"></i>
+      </th>
+
+      <th>
+        <span ng-show="! showFilterState">State</span>
+
+        <select
+          ng-show="showFilterState"
+          ng-model="filterTypeState"
+          >
+            <option value="eq">=</option>
+            <option value="neq">!=</option>
+            <option value="lt">&lt;</option>
+            <option value="lte">&lt;=</option>
+            <option value="gt">&gt;</option>
+            <option value="gte">&gt;=</option>
+            <option value="like">like</option>
+            <option value="isnull">null</option>
+            <option value="isnotnull">! null</option>
+        </select>
+
+        <input
+          ng-show="showFilterState"
+          placeholder="State"
+          type="text"
+          size="20"
+          ng-model="filterState"
+          ng-init="filterState = ''">
+
+        <i class="btn btn-info fa fa-filter"
+          ng-click="filter({ 'type': filterTypeState, 'field': 'state', 'value': filterState })"
+          ng-show="showFilterState"></i>
+
+        <i class="fa fa-filter"
+          ng-click="showFilterState = ! showFilterState"
+          ng-show="! showFilterState"></i>
       </th>
     </tr>
   </thead>
 
   <tbody>
-    <tr ng-repeat="performance in performance._embedded.performance">
-      <th class="id">{{ performance.id }}</th>
+    <tr data-href ng-repeat="performance in performance._embedded.performance">
+      <th role="row">{{ performance.id }}</th>
       <td>{{ performance.performanceDate | date:'YYYY-MM-DD'}}</td>
+      <td>{{ performance.year }}</td>
       <td>{{ performance.venue }}</td>
       <td>{{ performance.state }}</td>
     </tr>

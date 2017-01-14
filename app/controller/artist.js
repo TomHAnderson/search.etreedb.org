@@ -9,8 +9,24 @@ angular.module('etreedb')
 
 	$scope.init = function()
 	{
-		$scope.params = {};
 		$scope.loadArtist();
+		$scope.filters = { "filter": [], "order-by": [] };
+
+		$scope.showFilterVenue = false;
+		$scope.filterVenue = '';
+		$scope.filterTypeVenue = 'eq';
+
+		$scope.showFilterState = false;
+		$scope.filterState = '';
+		$scope.filterTypeState = 'eq';
+
+		$scope.showFilterPerformanceDate = false;
+		$scope.filterPerformanceDate = '';
+		$scope.filterTypePerformanceDate = 'eq';
+
+		$scope.showFilterYear = false;
+		$scope.filterYear = '';
+		$scope.filterTypeYear = 'eq';
 	}
 
 	$scope.loadArtist = function(url)
@@ -21,49 +37,21 @@ angular.module('etreedb')
 		}).then(
 			function successCallback(response) {
 				$scope.artist = response.data;
-				$scope.loadPerformance({'filter': [{ 'type': 'eq', 'field': 'artist', 'value': $routeParams.id}]});
+				$scope.filter({ 'type': 'eq', 'field': 'artist', 'value': $routeParams.id });
 			}, function errorCallback(response) {
 				alert('error');
 			}
 		);
 	}
 
-	$scope.orderBy = function(definition, label)
+	$scope.filter = function(filter)
 	{
-		if ($scope.lastOrderByLabel == label) {
-			$scope.lastOrderByDirection = ($scope.lastOrderByDirection == 'desc') ? 'asc': 'desc';
-		} else {
-			$scope.lastOrderByLabel = label;
-			$scope.lastOrderByDirection = 'desc';
-		}
-
-		var defaults = {
-			type: 'field',
-			direction: $scope.lastOrderByDirection
-		}
-
-		$scope.loadPerformance({'order-by': [angular.merge(defaults, definition)]});
+		$scope.filters.filter.unshift(filter);
+		$scope.load(API_URL + '/performance?' + $.param($scope.filters));
 	}
 
-	$scope.loadPerformance = function(params)
+	$scope.load = function(url)
 	{
-		$scope.params = angular.merge($scope.params, params);
-
-		$http({
-			method: 'GET',
-			url: API_URL + '/performance?' + $.param($scope.params)
-		}).then(
-			function successCallback(response) {
-				$scope.performance = response.data;
-			}, function errorCallback(response) {
-				alert('error');
-			}
-		);
-	}
-
-	$scope.loadPerformanceByUrl = function(url)
-	{
-//		$scope.params = {'filter': [{ 'type': 'eq', 'field': 'artist', 'value': $routeParams.id}]};
 		$http({
 			method: 'GET',
 			url: url
