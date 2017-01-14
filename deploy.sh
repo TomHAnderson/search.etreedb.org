@@ -1,3 +1,1 @@
-cd style && ./build.sh && cd ..
-ng build --prod
-scp -r dist/* db:~/etreedb/etreedb.org/html
+scp -r app/* db:~/etreedb/etreedb.org/html

@@ -1,5 +1,3 @@
-<h1>{{ artist.name }}</h1>
-
 <div class="pull-right">
   Page {{ performance.page }} of {{ performance.page_count }}
 
@@ -18,11 +16,46 @@
 
 <h2>Performances</h2>
 
-<table class="table" ng-init="init()">
+<table class="table table-striped" ng-init="init()">
   <thead>
     <tr>
       <th>
         Id
+      </th>
+
+      <th>
+        <span ng-show="! showFilterName">Name</span>
+
+        <select
+          ng-show="showFilterName"
+          ng-model="filterTypeName"
+          >
+            <option value="eq">=</option>
+            <option value="neq">!=</option>
+            <option value="lt">&lt;</option>
+            <option value="lte">&lt;=</option>
+            <option value="gt">&gt;</option>
+            <option value="gte">&gt;=</option>
+            <option value="like">like</option>
+            <option value="isnull">null</option>
+            <option value="isnotnull">! null</option>
+        </select>
+
+        <input
+          ng-show="showFilterName"
+          placeholder="Name"
+          type="text"
+          size="20"
+          ng-model="filterName"
+          ng-init="filterName = ''">
+
+        <i class="btn btn-info fa fa-filter"
+          ng-click="filter({ 'type': filterTypeName, 'alias': 'artist', 'field': 'name', 'value': filterName })"
+          ng-show="showFilterName"></i>
+
+        <i class="fa fa-filter"
+          ng-click="showFilterName = ! showFilterName"
+          ng-show="! showFilterName"></i>
       </th>
 
       <th>
@@ -171,6 +204,7 @@
   <tbody>
     <tr data-href ng-repeat="performance in performance._embedded.performance">
       <th role="row">{{ performance.id }}</th>
+      <td>{{ performance._embedded.artist.name }}</td>
       <td>{{ performance.performanceDate | date:'YYYY-MM-DD'}}</td>
       <td>{{ performance.year }}</td>
       <td>{{ performance.venue }}</td>

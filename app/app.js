@@ -27,10 +27,27 @@ angular.module('etreedb', ['ngRoute', 'angular-loading-bar'])
 				templateUrl : 'template/artist.html',
 				controller : 'ArtistController'
 			})
+			.when('/performance', {
+				templateUrl : 'template/performance-list.html',
+				controller : 'PerformanceListController'
+			})
 			.otherwise({redirectTo: '/'});
 
 		// use the HTML5 History API
 		$locationProvider.html5Mode(true);
 	}
 ])
+.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $location) {
+    var original = $location.path;
+    $location.path = function (path, reload) {
+        if (reload === false) {
+            var lastRoute = $route.current;
+            var un = $rootScope.$on('$locationChangeSuccess', function () {
+                $route.current = lastRoute;
+                un();
+            });
+        }
+        return original.apply($location, [path]);
+    };
+}])
 ;
