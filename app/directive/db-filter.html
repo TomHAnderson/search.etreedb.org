@@ -1,0 +1,52 @@
+<span ng-init="showFilter = false" ng-show="! showFilter">{{ label }}</span>
+
+<select
+  ng-init="type = 'eq'"
+  ng-show="showFilter"
+  ng-model="type"
+  >
+    <option value="eq">=</option>
+    <option value="neq">!=</option>
+    <option value="lt">&lt;</option>
+    <option value="lte">&lt;=</option>
+    <option value="gt">&gt;</option>
+    <option value="gte">&gt;=</option>
+    <option value="like">like</option>
+    <option value="isnull">null</option>
+    <option value="isnotnull">! null</option>
+</select>
+
+<input
+  ng-show="showFilter"
+  placeholder="{{ label }}"
+  type="text"
+  size="15"
+  ng-init="value = ''"
+  ng-model="value"
+>
+
+<i class="btn btn-info fa fa-filter"
+  ng-click="$parent.filter({
+    'type': type,
+    'alias': alias,
+    'field': name,
+    'value': value
+  })"
+  ng-show="showFilter"></i>
+
+<i class="btn btn-info fa fa-sort-desc"
+  ng-class="{ 'fa-sort-desc': direction == 'desc', 'fa-sort-asc': direction == 'asc' }"
+  ng-init="direction = 'desc'"
+  ng-click="$parent.orderBy({
+    'alias': alias,
+    'type': 'field',
+    'field': name,
+    'direction': direction
+  });
+  direction = (direction == 'desc') ? 'asc': 'desc';
+  "
+  ng-show="showFilter"></i>
+
+<i class="fa fa-filter"
+  ng-click="showFilter = ! showFilter"
+  ng-show="! showFilter"></i>

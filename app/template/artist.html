@@ -26,143 +26,19 @@
       </th>
 
       <th>
-        <span ng-show="! showFilterPerformanceDate">Date</span>
-
-        <select
-          ng-show="showFilterPerformanceDate"
-          ng-model="filterTypePerformanceDate"
-          >
-            <option value="eq">=</option>
-            <option value="neq">!=</option>
-            <option value="lt">&lt;</option>
-            <option value="lte">&lt;=</option>
-            <option value="gt">&gt;</option>
-            <option value="gte">&gt;=</option>
-            <option value="like">like</option>
-            <option value="isnull">null</option>
-            <option value="isnotnull">! null</option>
-        </select>
-
-        <input
-          ng-show="showFilterPerformanceDate"
-          placeholder="Performance Date"
-          type="text"
-          size="20"
-          ng-model="filterPerformanceDate"
-          ng-init="filterPerformanceDate = ''">
-
-        <i class="btn btn-info fa fa-filter"
-          ng-click="filter({ 'type': filterTypePerformanceDate, 'field': 'performanceDate', 'value': filterPerformanceDate })"
-          ng-show="showFilterPerformanceDate"></i>
-
-        <i class="fa fa-filter"
-          ng-click="showFilterPerformanceDate = ! showFilterPerformanceDate"
-          ng-show="! showFilterPerformanceDate"></i>
+        <db-filter name="performanceDate" alias="row" label="Date"></db-filter>
       </th>
 
       <th>
-        <span ng-show="! showFilterYear">Year</span>
-
-        <select
-          ng-show="showFilterYear"
-          ng-model="filterTypeYear"
-          >
-            <option value="eq">=</option>
-            <option value="neq">!=</option>
-            <option value="lt">&lt;</option>
-            <option value="lte">&lt;=</option>
-            <option value="gt">&gt;</option>
-            <option value="gte">&gt;=</option>
-            <option value="like">like</option>
-            <option value="isnull">null</option>
-            <option value="isnotnull">! null</option>
-        </select>
-
-        <input
-          ng-show="showFilterYear"
-          placeholder="Year"
-          type="text"
-          size="20"
-          ng-model="filterYear"
-          ng-init="filterYear = ''">
-
-        <i class="btn btn-info fa fa-filter"
-          ng-click="filter({ 'type': filterTypeYear, 'field': 'year', 'value': filterYear })"
-          ng-show="showFilterYear"></i>
-
-        <i class="fa fa-filter"
-          ng-click="showFilterYear = ! showFilterYear"
-          ng-show="! showFilterYear"></i>
+        <db-filter name="year" alias="row" label="Year"></db-filter>
       </th>
 
       <th>
-        <span ng-show="! showFilterVenue">Venue</span>
-
-        <select
-          ng-show="showFilterVenue"
-          ng-model="filterTypeVenue"
-          >
-            <option value="eq">=</option>
-            <option value="neq">!=</option>
-            <option value="lt">&lt;</option>
-            <option value="lte">&lt;=</option>
-            <option value="gt">&gt;</option>
-            <option value="gte">&gt;=</option>
-            <option value="like">like</option>
-            <option value="isnull">null</option>
-            <option value="isnotnull">! null</option>
-        </select>
-
-        <input
-          ng-show="showFilterVenue"
-          placeholder="Venue"
-          type="text"
-          size="20"
-          ng-model="filterVenue"
-          ng-init="filterVenue = ''">
-
-        <i class="btn btn-info fa fa-filter"
-          ng-click="filter({ 'type': filterTypeVenue, 'field': 'venue', 'value': filterVenue })"
-          ng-show="showFilterVenue"></i>
-
-        <i class="fa fa-filter"
-          ng-click="showFilterVenue = ! showFilterVenue"
-          ng-show="! showFilterVenue"></i>
+        <db-filter name="venue" alias="row" label="Venue"></db-filter>
       </th>
 
       <th>
-        <span ng-show="! showFilterState">State</span>
-
-        <select
-          ng-show="showFilterState"
-          ng-model="filterTypeState"
-          >
-            <option value="eq">=</option>
-            <option value="neq">!=</option>
-            <option value="lt">&lt;</option>
-            <option value="lte">&lt;=</option>
-            <option value="gt">&gt;</option>
-            <option value="gte">&gt;=</option>
-            <option value="like">like</option>
-            <option value="isnull">null</option>
-            <option value="isnotnull">! null</option>
-        </select>
-
-        <input
-          ng-show="showFilterState"
-          placeholder="State"
-          type="text"
-          size="20"
-          ng-model="filterState"
-          ng-init="filterState = ''">
-
-        <i class="btn btn-info fa fa-filter"
-          ng-click="filter({ 'type': filterTypeState, 'field': 'state', 'value': filterState })"
-          ng-show="showFilterState"></i>
-
-        <i class="fa fa-filter"
-          ng-click="showFilterState = ! showFilterState"
-          ng-show="! showFilterState"></i>
+        <db-filter name="state" alias="row" label="State"></db-filter>
       </th>
       <th>Sources</th>
     </tr>

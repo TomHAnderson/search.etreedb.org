@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('etreedb')
-.controller('ArtistController', [
+.controller('SourceListController', [
 	'$routeParams',
 	'$scope',
 	'$http',
@@ -10,8 +10,19 @@ angular.module('etreedb')
 
 	$scope.init = function()
 	{
-		$scope.loadArtist();
-		$scope.filters = { "filter": [], "order-by": [] };
+		$scope.filters = {
+			"filter": [{
+				"type": "innerjoin",
+				"field": "artist",
+				"alias": "artist"
+			}],
+			"order-by": []
+		};
+		$scope.load(API_URL + '/performance?' + $.param($scope.filters));
+
+		$scope.showFilterName = false;
+		$scope.filterName = '';
+		$scope.filterTypeName = 'eq';
 
 		$scope.showFilterVenue = false;
 		$scope.filterVenue = '';
@@ -36,29 +47,6 @@ angular.module('etreedb')
 		$scope.load(API_URL + '/performance?' + $.param($scope.filters));
 	}
 
-	$scope.orderBy = function(filter)
-	{
-		$scope.filters["order-by"].unshift(filter);
-		console.log($scope.filters);
-		$scope.load(API_URL + '/performance?' + $.param($scope.filters));
-
-	}
-
-	$scope.loadArtist = function(url)
-	{
-		$http({
-			method: 'GET',
-			url: API_URL + '/artist/' + $routeParams.id
-		}).then(
-			function successCallback(response) {
-				$scope.artist = response.data;
-				$scope.filter({ 'type': 'eq', 'field': 'artist', 'value': $routeParams.id });
-			}, function errorCallback(response) {
-				alert('error');
-			}
-		);
-	}
-
 	$scope.load = function(url)
 	{
 		$http({
@@ -67,8 +55,6 @@ angular.module('etreedb')
 		}).then(
 			function successCallback(response) {
 				$scope.performance = response.data;
-
-				console.log(response.data);
 			}, function errorCallback(response) {
 				alert('error');
 			}
@@ -79,4 +65,5 @@ angular.module('etreedb')
 	{
 		$location.path('/performance/' + performance.id);
 	}
+
 }]);

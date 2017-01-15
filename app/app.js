@@ -35,6 +35,10 @@ angular.module('etreedb', ['ngRoute', 'angular-loading-bar', 'nl2br'])
 				templateUrl : 'template/performance.html',
 				controller : 'PerformanceController'
 			})
+			.when('/source', {
+				templateUrl : 'template/source-list.html',
+				controller : 'SourceListController'
+			})
 			.otherwise({redirectTo: '/'});
 
 		// use the HTML5 History API
@@ -54,4 +58,14 @@ angular.module('etreedb', ['ngRoute', 'angular-loading-bar', 'nl2br'])
         return original.apply($location, [path]);
     };
 }])
+.directive('dbFilter', function() {
+	return {
+		scope: {
+			label: "@label",
+			name: "@name",
+			alias: "@alias"
+		},
+		templateUrl: 'directive/db-filter.html'
+	}
+});
 ;
