@@ -62,7 +62,7 @@ angular.module('etreedb', ['ngRoute', 'angular-loading-bar', 'nl2br'])
 	return {
 		scope: {
 			label: "@label",
-			name: "@name",
+			field: "@field",
 			alias: "@alias"
 		},
 		templateUrl: 'directive/db-filter.html'

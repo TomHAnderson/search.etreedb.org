@@ -20,30 +20,33 @@
   ng-show="showFilter"
   placeholder="{{ label }}"
   type="text"
-  size="15"
+  size="10"
   ng-init="value = ''"
   ng-model="value"
 >
 
-<i class="btn btn-info fa fa-filter"
+<i class="btn btn-info btn-sm fa fa-filter"
+  role="button"
   ng-click="$parent.filter({
     'type': type,
     'alias': alias,
-    'field': name,
+    'field': field,
     'value': value
   })"
   ng-show="showFilter"></i>
 
-<i class="btn btn-info fa fa-sort-desc"
-  ng-class="{ 'fa-sort-desc': direction == 'desc', 'fa-sort-asc': direction == 'asc' }"
-  ng-init="direction = 'desc'"
-  ng-click="$parent.orderBy({
+<i class="btn btn-info btn-sm fa"
+  role="button"
+  ng-class="{ 'fa-sort-desc': direction == 'desc', 'fa-sort-asc': direction == 'asc', 'fa-sort': direction == '' }"
+  ng-init="direction = ''"
+  ng-click="
+  direction = (direction == 'desc') ? 'asc': 'desc';
+  $parent.orderBy({
     'alias': alias,
     'type': 'field',
-    'field': name,
+    'field': field,
     'direction': direction
   });
-  direction = (direction == 'desc') ? 'asc': 'desc';
   "
   ng-show="showFilter"></i>
 
