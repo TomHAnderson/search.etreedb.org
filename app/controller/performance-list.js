@@ -10,7 +10,7 @@ angular.module('etreedb')
 
 	$scope.init = function()
 	{
-		$scope.filters = {
+		$scope.query = {
 			"filter": [{
 				"type": "innerjoin",
 				"field": "artist",
@@ -18,33 +18,19 @@ angular.module('etreedb')
 			}],
 			"order-by": []
 		};
-		$scope.load(API_URL + '/performance?' + $.param($scope.filters));
-
-		$scope.showFilterName = false;
-		$scope.filterName = '';
-		$scope.filterTypeName = 'eq';
-
-		$scope.showFilterVenue = false;
-		$scope.filterVenue = '';
-		$scope.filterTypeVenue = 'eq';
-
-		$scope.showFilterState = false;
-		$scope.filterState = '';
-		$scope.filterTypeState = 'eq';
-
-		$scope.showFilterPerformanceDate = false;
-		$scope.filterPerformanceDate = '';
-		$scope.filterTypePerformanceDate = 'eq';
-
-		$scope.showFilterYear = false;
-		$scope.filterYear = '';
-		$scope.filterTypeYear = 'eq';
+		$scope.load(API_URL + '/performance?' + $.param($scope.query));
 	}
 
 	$scope.filter = function(filter)
 	{
-		$scope.filters.filter.unshift(filter);
-		$scope.load(API_URL + '/performance?' + $.param($scope.filters));
+		$scope.query.filter.unshift(filter);
+		$scope.load(API_URL + '/performance?' + $.param($scope.query));
+	}
+
+	$scope.orderBy = function(filter)
+	{
+		$scope.query["order-by"].unshift(filter);
+		$scope.load(API_URL + '/performance?' + $.param($scope.query));
 	}
 
 	$scope.load = function(url)
@@ -54,7 +40,7 @@ angular.module('etreedb')
 			url: url
 		}).then(
 			function successCallback(response) {
-				$scope.performance = response.data;
+				$scope.data = response.data;
 			}, function errorCallback(response) {
 				alert('error');
 			}

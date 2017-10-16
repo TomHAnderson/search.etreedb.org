@@ -5,16 +5,8 @@ angular.module('etreedb')
 
 	$scope.init = function()
 	{
-		$scope.filters = { "filter": [], "order-by": [] };
-		$scope.load(API_URL + '/artist?' + $.param($scope.filters));
-
-		$scope.showFilterName = false;
-		$scope.filterName = '';
-		$scope.filterTypeName = 'eq';
-
-		$scope.showFilterAbbreviation = false;
-		$scope.filterAbbreviation = '';
-		$scope.filterTypeAbbreviation = 'eq';
+		$scope.query = { "filter": [], "order-by": [] };
+		$scope.load(API_URL + '/artist?' + $.param($scope.query));
 	}
 
 	$scope.redirectToArtist = function(artist)
@@ -24,8 +16,14 @@ angular.module('etreedb')
 
 	$scope.filter = function(filter)
 	{
-		$scope.filters.filter.unshift(filter);
-		$scope.load(API_URL + '/artist?' + $.param($scope.filters));
+		$scope.query.filter.unshift(filter);
+		$scope.load(API_URL + '/artist?' + $.param($scope.query));
+	}
+
+	$scope.orderBy = function(filter)
+	{
+		$scope.query["order-by"].unshift(filter);
+		$scope.load(API_URL + '/artist?' + $.param($scope.query));
 	}
 
 	$scope.load = function(url)
@@ -41,5 +39,4 @@ angular.module('etreedb')
 			}
 		);
 	}
-
 }]);

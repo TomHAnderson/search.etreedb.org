@@ -19,26 +19,6 @@ angular.module('etreedb')
 			"order-by": []
 		};
 		$scope.load(API_URL + '/performance?' + $.param($scope.filters));
-
-		$scope.showFilterName = false;
-		$scope.filterName = '';
-		$scope.filterTypeName = 'eq';
-
-		$scope.showFilterVenue = false;
-		$scope.filterVenue = '';
-		$scope.filterTypeVenue = 'eq';
-
-		$scope.showFilterState = false;
-		$scope.filterState = '';
-		$scope.filterTypeState = 'eq';
-
-		$scope.showFilterPerformanceDate = false;
-		$scope.filterPerformanceDate = '';
-		$scope.filterTypePerformanceDate = 'eq';
-
-		$scope.showFilterYear = false;
-		$scope.filterYear = '';
-		$scope.filterTypeYear = 'eq';
 	}
 
 	$scope.filter = function(filter)

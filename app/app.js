@@ -1,7 +1,5 @@
 'use strict';
 
-var API_URL = 'https://api.etreedb.org';
-
 $(function(){
     $('*[data-href]').on('click', function() {
         window.location = $(this).data('href');
@@ -9,7 +7,7 @@ $(function(){
     });
 });
 
-angular.module('etreedb', ['ngRoute', 'angular-loading-bar', 'nl2br'])
+angular.module('etreedb', ['ngRoute', 'angular-loading-bar', 'nl2br', 'edbFilter'])
 .config([
 	'$locationProvider',
 	'$routeProvider',
@@ -58,14 +56,4 @@ angular.module('etreedb', ['ngRoute', 'angular-loading-bar', 'nl2br'])
         return original.apply($location, [path]);
     };
 }])
-.directive('dbFilter', function() {
-	return {
-		scope: {
-			label: "@label",
-			field: "@field",
-			alias: "@alias"
-		},
-		templateUrl: 'directive/db-filter.html'
-	}
-});
 ;

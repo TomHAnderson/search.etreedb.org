@@ -1,0 +1,56 @@
+<span ng-init="showFilter = false" ng-show="! showFilter">{{ label }}</span>
+
+<select
+  ng-init="type = 'eq'"
+  ng-show="showFilter"
+  ng-model="type"
+  >
+    <option title="equal to" value="eq">=</option>
+    <option title="not equal to" value="neq">!=</option>
+    <option title="less than" value="lt">&lt;</option>
+    <option title="less than or equal to" value="lte">&lt;=</option>
+    <option title="greater than" value="gt">&gt;</option>
+    <option title="greater than or equal to" value="gte">&gt;=</option>
+    <option title="like" value="like">%</option>
+    <option title="is null" value="isnull">&Oslash;</option>
+    <option title="is not null" value="isnotnull">!&Oslash;</option>
+</select>
+
+<input
+  ng-show="showFilter"
+  placeholder="{{ label }}"
+  type="text"
+  size="10"
+  ng-init="value = ''"
+  ng-model="value"
+  ng-keyup="showFilter = ($event.code != 'Escape')"
+>
+
+<i class="btn btn-info btn-sm fa fa-filter"
+  role="button"
+  ng-click="$parent.filter({
+    'type': type,
+    'alias': alias,
+    'field': field,
+    'value': value
+  })"
+  ng-show="showFilter"></i>
+
+<i class="btn btn-info btn-sm fa"
+  role="button"
+  ng-class="{ 'fa-sort-desc': direction == 'desc', 'fa-sort-asc': direction == 'asc', 'fa-sort': direction == '' }"
+  ng-init="direction = ''"
+  ng-click="
+  direction = (direction == 'desc') ? 'asc': 'desc';
+  $parent.orderBy({
+    'alias': alias,
+    'type': 'field',
+    'field': field,
+    'direction': direction
+  });
+  "
+  ng-show="showFilter"></i>
+
+<i class="fa fa-filter"
+  ng-click="showFilter = ! showFilter; value = ''; type = 'eq';"
+  ng-show="! showFilter"></i>
