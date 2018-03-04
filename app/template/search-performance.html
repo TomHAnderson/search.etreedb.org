@@ -1,28 +1,25 @@
-<h1>{{ artist.name }}</h1>
-
 <div class="pull-right">
   Page {{ performance.page }} of {{ performance.page_count }}
 
   <ul class="pagination center-block">
-    <li>
-      <a href="#" ng-click="init()">
-        <i class="fa fa-filter"></i>
-        reset
-      </a>
-    </li>
     <li ng-repeat="(name, link) in performance._links">
-      <a href="#" ng-click="loadPerformanceByUrl(link.href)">{{ name }}</a>
+      <a href="#" ng-click="load(link.href)">{{ name }}</a>
     </li>
   </ul>
 </div>
 
-<h2>Performances</h2>
+<h2>Performance Search</h2>
+<h3>Search: {{ search }}</h3>
 
-<table class="table" ng-init="init()">
+<table class="table table-striped" ng-init="init()">
   <thead>
     <tr>
       <th>
         <edb-filter field="id" alias="row">Id</edb-filter>
+      </th>
+
+      <th>
+        <edb-filter field="name" alias="artist">Name</edb-filter>
       </th>
 
       <th>
@@ -46,10 +43,11 @@
 
   <tbody>
     <tr data-href
-      ng-repeat="performance in performance._embedded.performance"
+      ng-repeat="performance in data._embedded.performance"
       ng-click="redirectToPerformance(performance)">
       <th role="row">{{ performance.id }}</th>
-      <td>{{ performance.performanceDate}}</td>
+      <td>{{ performance._embedded.artist.name }}</td>
+      <td>{{ performance.performanceDate }}</td>
       <td>{{ performance.year }}</td>
       <td>{{ performance.venue }}</td>
       <td>{{ performance.state }}</td>
@@ -57,3 +55,7 @@
     </tr>
   </tbody>
 </table>
+
+<div ng-if="data && ! data._embedded.performance.count">
+	No Results
+</div>

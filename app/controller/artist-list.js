@@ -35,6 +35,7 @@ angular.module('etreedb')
 			function successCallback(response) {
 				$scope.data = response.data;
 			}, function errorCallback(response) {
+console.log(response);
 				alert('error');
 			}
 		);
