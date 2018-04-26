@@ -37,7 +37,7 @@ angular.module('etreedb', ['ngRoute', 'angular-loading-bar', 'nl2br', 'edbFilter
 				templateUrl : 'template/source-list.html',
 				controller : 'SourceListController'
 			})
-			.when('/search/performance', {
+			.when('/performance-search', {
 				templateUrl : 'template/search-performance.html',
 				controller : 'SearchPerformanceController'
 			})
