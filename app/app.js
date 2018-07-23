@@ -18,6 +18,15 @@ angular.module('etreedb', ['ngRoute', 'angular-loading-bar', 'nl2br', 'edbFilter
 				controller : 'HomeController'
 			})
 			.when('/artist', {
+				templateUrl : 'template/artist-graphql.html',
+				controller : 'ArtistGraphQLController'
+			})
+			.when('/artist/:id', {
+				templateUrl : 'template/artist-detail-graphql.html',
+				controller : 'ArtistDetailGraphQLController'
+			})
+/*
+			.when('/artist', {
 				templateUrl : 'template/artist-list.html',
 				controller : 'ArtistListController'
 			})
@@ -25,6 +34,7 @@ angular.module('etreedb', ['ngRoute', 'angular-loading-bar', 'nl2br', 'edbFilter
 				templateUrl : 'template/artist.html',
 				controller : 'ArtistController'
 			})
+*/
 			.when('/performance', {
 				templateUrl : 'template/performance-list.html',
 				controller : 'PerformanceListController'

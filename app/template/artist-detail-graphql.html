@@ -1,0 +1,52 @@
+<h1>{{ data.year[0].name }}</h1>
+
+<pre>
+Query for Artist and Years
+{{ query }}
+
+Query for Performances
+{{ performanceQuery }}
+</pre>
+
+<div class="btn-group" role="group" aria-label="Performance Years">
+  <button ng-repeat="performance in data.year[0].performance" class="btn btn-outline-secondary" ng-click="loadYear(performance.year)">
+    {{ performance.year }}
+  </button>
+</div>
+
+<table class="table table-striped table-hover" ng-init="init()">
+  <thead>
+    <tr>
+      <th>
+        Id
+      </th>
+
+      <th>
+        Performance Date
+      </th>
+
+      <th>
+        Venue
+      </th>
+
+      <th>
+        City
+      </th>
+
+      <th>
+        State
+      </th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr data-href ng-repeat="performance in data.performance">
+      <th role="row">{{ performance.id }}</th>
+      <td>{{ performance.performanceDate }}</td>
+      <td>{{ performance.venue }}</td>
+      <td>{{ performance.city }}</td>
+      <td>{{ performance.state }}</td>
+    </tr>
+  </tbody>
+</table>
