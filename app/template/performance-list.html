@@ -1,8 +1,8 @@
 <div class="pull-right">
-  Page {{ performance.page }} of {{ performance.page_count }}
+  Page {{ data.page }} of {{ data.page_count }}
 
   <ul class="pagination center-block">
-    <li ng-repeat="(name, link) in performance._links">
+    <li ng-repeat="(name, link) in data._links">
       <a href="#" ng-click="load(link.href)">{{ name }}</a>
     </li>
   </ul>
