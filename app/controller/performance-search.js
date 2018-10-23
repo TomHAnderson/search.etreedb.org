@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('etreedb')
-.controller('SearchPerformanceController', [
+.controller('PerformanceSearchController', [
 	'$routeParams',
 	'$scope',
 	'$http',
@@ -10,7 +10,7 @@ angular.module('etreedb')
 
 	$scope.init = function()
 	{
-		$scope.load(API_URL + '/search/performance?search=' + $location.search().search);
+		$scope.load(API_URL + '/performance-search?search=' + $location.search().search);
 		$scope.search = $location.search().search;
 	}
 
@@ -24,6 +24,7 @@ angular.module('etreedb')
 				$scope.search = $location.search().search;
 				$scope.data = response.data;
 			}, function errorCallback(response) {
+				console.log(response);
 				alert('error');
 			}
 		);
