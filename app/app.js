@@ -11,7 +11,11 @@ angular.module('etreedb', ['ngRoute', 'angular-loading-bar', 'nl2br', 'edbFilter
 .config([
 	'$locationProvider',
 	'$routeProvider',
-	function($locationProvider, $routeProvider) {
+	'$httpProvider',
+	function($locationProvider, $routeProvider, $httpProvider) {
+//		$httpProvider.defaults.headers.common['Cache-Control'] = 'no-cache';
+		$httpProvider.defaults.cache = false;
+
 		$routeProvider
 			.when('/', {
 				templateUrl : 'template/home.html',
