@@ -1,10 +1,15 @@
 {
-  "name": "angular-seed",
-  "private": true,
-  "version": "0.0.0",
-  "description": "A starter project for AngularJS",
-  "repository": "https://github.com/angular/angular-seed",
+  "name": "etreedb/search",
+  "private": false,
+  "version": "0.0.1",
+  "description": "A microservice for searching setlists at api.etreedb.org",
+  "repository": "https://github.com/etreedb/search",
   "license": "MIT",
+  "author": {
+    "name": "Tom H Anderson",
+    "email": "tom.h.anderson@gmail.com",
+    "url": "https://tomhanderson.com"
+  },
   "devDependencies": {
     "bower": "^1.7.7",
     "http-server": "^0.9.0",
